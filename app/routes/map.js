@@ -3,6 +3,6 @@
 var App = require('app');
 
 App.Router.map(function () {
-  // Define routes here.
-  this.route('about');
+  this.resource('articles');
+  this.resource('article', {path: '/articles/:slug'});
 });

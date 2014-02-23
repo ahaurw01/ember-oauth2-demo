@@ -1,0 +1,7 @@
+<h2>Articles</h2>
+
+<ul>
+  {{#each model}}
+    <li>{{#link-to "article" slug}}{{title}}{{/link-to}}</li>
+  {{/each}}
+</ul>
