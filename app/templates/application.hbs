@@ -1,5 +1,8 @@
 <div class="container">
   {{#link-to 'index'}}<h1>The New York Divides</h1>{{/link-to}}
+  {{#if isLoggedIn}}
+    <h5>Welcome, {{controllers.auth.name.givenName}}</h5>
+  {{/if}}
 
   <div class="well">
     {{outlet}}
