@@ -56,7 +56,7 @@ app.get('/auth/google',
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/google/callback',
-    passport.authenticate('google', {failureRedirect: '/error'}),
+    passport.authenticate('google', {failureRedirect: '/'}),
     function (req, res) {
       res.redirect('/');
     });
@@ -67,10 +67,7 @@ app.get('/auth/logout', function (req, res) {
   res.redirect('/');
 });
 
-app.get('/error', function (req, res) {
-  res.send(403);
-});
-
+// get all articles
 app.get('/api/articles', function (req, res) {
   var payload;
   if (req.isAuthenticated()) {
@@ -93,6 +90,7 @@ app.get('/api/articles', function (req, res) {
   res.json(payload);
 });
 
+// get single article
 app.get('/api/articles/:slug', function (req, res) {
   var article = _.extend({}, _.find(articles, {slug: req.params.slug}));
   if (req.isAuthenticated()) {
@@ -103,6 +101,7 @@ app.get('/api/articles/:slug', function (req, res) {
   res.json(article);
 });
 
+// get profile
 app.get('/api/profile', function (req, res) {
   if (req.isAuthenticated()) {
     res.json(req.user);
@@ -114,7 +113,7 @@ app.get('/api/profile', function (req, res) {
 app.listen(3000);
 console.log('listening on port 3000...');
 
-
+// article data
 var articles = [
   {
     paywall: false,
