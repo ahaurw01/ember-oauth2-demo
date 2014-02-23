@@ -64,6 +64,7 @@ exports.config =
         browser: true
         jquery: true
         node: true
+        debug: true
       globals:
         DS: false
         Em: false

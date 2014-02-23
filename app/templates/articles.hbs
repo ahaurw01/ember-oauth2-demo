@@ -5,3 +5,6 @@
     <li>{{#link-to "article" slug}}{{title}}{{/link-to}}</li>
   {{/each}}
 </ul>
+{{#if isNotLoggedIn}}
+  <i>Sign in to see more...</i>
+{{/if}}

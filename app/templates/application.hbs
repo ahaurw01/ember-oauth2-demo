@@ -1,7 +1,8 @@
 <div class="container">
-  <h1>The New York Divides</h1>
+  {{#link-to 'index'}}<h1>The New York Divides</h1>{{/link-to}}
 
   <div class="well">
     {{outlet}}
   </div>
+  {{google-button id="google-button" action="googleSignIn" isLoggedIn=isLoggedIn}}
 </div>

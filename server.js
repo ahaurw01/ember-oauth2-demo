@@ -58,8 +58,14 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
     passport.authenticate('google', {failureRedirect: '/error'}),
     function (req, res) {
-      res.send(200);
+      res.redirect('/');
     });
+
+// logout
+app.get('/auth/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
 
 app.get('/error', function (req, res) {
   res.send(403);
@@ -95,6 +101,14 @@ app.get('/api/articles/:slug', function (req, res) {
     article.body = article.body.substring(0, article.body.indexOf('|||'));
   }
   res.json(article);
+});
+
+app.get('/api/profile', function (req, res) {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.send(401);
+  }
 });
 
 app.listen(3000);
