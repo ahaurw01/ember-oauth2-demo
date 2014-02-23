@@ -2,12 +2,7 @@
 
 module.exports = Ember.Route.extend({
   beforeModel: function (transition) {
-    // retrieve the user profile
-    var authController = this.controllerFor('auth');
-    $.getJSON('/api/profile').then(function (profile) {
-      authController.set('content', profile);
-    }, function (error) {
-    }).then(function () {
+    function checkForRedirect() {
       // See if we need to transition elsewhere after logging in.
       var previousPath = localStorage.previousPath;
       if (previousPath) {
@@ -15,6 +10,19 @@ module.exports = Ember.Route.extend({
         transition.abort();
         window.location.replace(previousPath);
       }
+    }
+
+    // retrieve the user profile
+    var authController = this.controllerFor('auth');
+    return new Ember.RSVP.Promise(function (resolve, reject) {
+      Ember.RSVP.Promise.cast($.getJSON('/api/profile'))
+          .then(function (profile) {
+            authController.set('content', profile);
+          })
+          .finally(function () {
+            checkForRedirect();
+            resolve();
+          });
     });
   },
 
@@ -28,6 +36,10 @@ module.exports = Ember.Route.extend({
         // log out!
         window.location.href = '/auth/logout';
       }
+    },
+
+    viewProfile: function () {
+      this.transitionTo('profile');
     }
   }
 });
