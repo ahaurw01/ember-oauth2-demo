@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link rel="stylesheet" href="styles/test.css">
+  <script src="scripts/jquery-2.0.3.min.js"></script>
+  <script src="../scripts/vendor.js"></script>
+  <script src="/scripts/ember.js"></script>
+  <script type="text/javascript">
+    window.ENV = window.ENV || {};
+    window.ENV.TEST = window.ENV.TEST || true;
+  </script>
+  <script src="../scripts/app.js"></script>
+  <script src="scripts/test-vendor.js"></script>
+  <script src="scripts/test-browser.js"></script>
+  <script src="scripts/test.js"></script>
+  <script src="scripts/load-tests.js"></script>
+  <script>
+    $(function() {
+      mocha.run();
+    });
+  </script>
+</head>
+<body class="test">
+  <div id="mocha"></div>
+</body>
+</html>
